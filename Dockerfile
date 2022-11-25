@@ -50,6 +50,7 @@ RUN echo "===> Compiling zeek..." \
     && git clone https://github.com/Scen4ri0/LDAP.git \
     && cd LDAP \
     && ls -la\
+    && chmod u+x configure\
     && CC=clang ./configure --zeek-dist=/tmp/zeek \
     && make -j $(nproc) \
     && make install \
