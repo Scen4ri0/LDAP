@@ -1,7 +1,7 @@
 #include "Plugin.h"
 #include "analyzer/Component.h"
 
-
+#include "LDAP.h"
 
 namespace plugin { namespace Zeek_LDAP { Plugin plugin; } }
 
