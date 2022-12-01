@@ -30,7 +30,7 @@ flow LDAP_Flow(is_orig: bool) {
 	# get better performance with datagram.
 
 	# flowunit = BROWSER_PDU(is_orig) withcontext(connection, this);
-
+	datagram = LDAP_PDU(is_orig) withcontext(connection, this);
 };
 
 %include ldap-analyzer.pac
