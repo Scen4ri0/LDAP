@@ -1,9 +1,9 @@
 type LDAP_PDU(is_orig:  bool) = record{
-    operation:      LDAP_Op;
-    messageid:      uint32;
+    messageid:       uint32;
+    protocolOp:      ProtocolOp;   
 }
 
-type LDAP_Op = record{
+type ProtocolOp = record{
         bindRequest:            LDAP_string(false, offsetof(BindRequest));
         bindResponse:           LDAP_string(false, offsetof(BindResponse));
         unbindRequest:          LDAP_string(false, offsetof(UnbindRequest));
