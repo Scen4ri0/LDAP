@@ -89,5 +89,5 @@ refine flow LDAP_Flow += {
 }
 
 refine typeattr LDAP_PDU += &let{
-    proc: bool = $context.flow.proc_ldap_message(this);
+    proc: bool = $context.connection.proc_ldap_message(this);
 }

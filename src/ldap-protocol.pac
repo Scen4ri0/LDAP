@@ -3,26 +3,26 @@ type LDAP_PDU(is_orig:  bool) = record{
     protocolOp:      ProtocolOp;   
 }
 
-type ProtocolOp = record{
-        bindRequest:            LDAP_string(false, offsetof(BindRequest));
-        bindResponse:           LDAP_string(false, offsetof(BindResponse));
-        unbindRequest:          LDAP_string(false, offsetof(UnbindRequest));
-        searchRequest:          LDAP_string(false, offsetof(SearchRequest));
-        searchResultEntry:      LDAP_string(false, offsetof(SearchResultEntry));
-        searchResultDone:       LDAP_string(false, offsetof(SearchResultDone));
-        searchResultReference:  LDAP_string(false, offsetof(SearchResultReference));
-        modifyRequest:          LDAP_string(false, offsetof(ModifyRequest));
-        modifyResponse:         LDAP_string(false, offsetof(ModifyResponse));
-        addRequest:             LDAP_string(false, offsetof(AddRequest));
-        addResponse:            LDAP_string(false, offsetof(AddResponse));
-        delRequest:             LDAP_string(false, offsetof(DelRequest));
-        delResponse:            LDAP_string(false, offsetof(DelResponse));
-        modifyDNRequest:        LDAP_string(false, offsetof(ModifyDNRequest));
-        modifyDNResponse:       LDAP_string(false, offsetof(ModifyDNResponse));
-        compareRequest:         LDAP_string(false, offsetof(CompareRequest));
-        compareResponse:        LDAP_string(false, offsetof(CompareResponse));
-        abandonRequest:         LDAP_string(false, offsetof(AbandonRequest));
-        extendedRequest:        LDAP_string(false, offsetof(ExtendedRequest));
-        extendedResponse:       LDAP_string(false, offsetof(ExtendedResponse));
-        intermediateResponse:   LDAP_string(false, offsetof(IntermediateResponse));
+type ProtocolOp(protocolOp: LDAP_string(false, offsetof(BindRequest))) = record{
+        "BindRequest"        ->  bindRequest:            LDAP_string(false, offsetof(BindRequest));
+        "BindResponset"         ->  bindResponse:           LDAP_string(false, offsetof(BindResponse));
+        "UnbindRequest"         ->  unbindRequest:          LDAP_string(false, offsetof(UnbindRequest));
+        "SearchRequest"         ->  searchRequest:          LDAP_string(false, offsetof(SearchRequest));
+        "SearchResultEntry"     ->  searchResultEntry:      LDAP_string(false, offsetof(SearchResultEntry));
+        "SearchResultDone"      ->  searchResultDone:       LDAP_string(false, offsetof(SearchResultDone));
+        "SearchResultReference" ->  searchResultReference:  LDAP_string(false, offsetof(SearchResultReference));
+        "ModifyRequest"         ->  modifyRequest:          LDAP_string(false, offsetof(ModifyRequest));
+        "ModifyResponset"       ->  modifyResponse:         LDAP_string(false, offsetof(ModifyResponse));
+        "AddRequest"            ->  addRequest:             LDAP_string(false, offsetof(AddRequest));
+        "AddResponse"           ->  addResponse:            LDAP_string(false, offsetof(AddResponse));
+        "DelRequest"            ->  delRequest:             LDAP_string(false, offsetof(DelRequest));
+        "DelResponse"           ->  delResponse:            LDAP_string(false, offsetof(DelResponse));
+        "ModifyDNRequest"       ->  modifyDNRequest:        LDAP_string(false, offsetof(ModifyDNRequest));
+        "ModifyDNResponse)"     ->  modifyDNResponse:       LDAP_string(false, offsetof(ModifyDNResponse));
+        "CompareRequest"        ->  compareRequest:         LDAP_string(false, offsetof(CompareRequest));
+        "CompareResponse"       ->  compareResponse:        LDAP_string(false, offsetof(CompareResponse));
+        "AbandonRequest"        ->  abandonRequest:         LDAP_string(false, offsetof(AbandonRequest));
+        "ExtendedRequest"       ->  extendedRequest:        LDAP_string(false, offsetof(ExtendedRequest));
+        "ExtendedResponse"      ->  extendedResponse:       LDAP_string(false, offsetof(ExtendedResponse));
+        "IntermediateResponse"  ->  intermediateResponse:   LDAP_string(false, offsetof(IntermediateResponse));
 }
