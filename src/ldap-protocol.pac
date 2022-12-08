@@ -1,11 +1,8 @@
-type LDAP_PDU(is_orig: bool) = record{
+type LDAP_PDU(is_orig: bool, application: uint16) = record{
     messageID:       uint16;
-    potocolOp:       PrOp;
+    potocolOp:       ProtocolOp(application);
 }
 
-type PrOp(application: uint16) = record{
-     protocolOp: ProtocolOp(appliaction);
-}
 type ProtocolOp(appliaction: uint16) = case appliaction of{
         0   ->  protocolOp:   BindRequest;
         1   ->  protocolOp:   BindResponse;
