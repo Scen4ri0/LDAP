@@ -47,6 +47,6 @@ refine flow LDAP_Flow += {
         return true;
     %}
 
-%}
+}
 
 
