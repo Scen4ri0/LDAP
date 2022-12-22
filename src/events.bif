@@ -1,5 +1,5 @@
 event ldap_bind_request%(c: connection, messageid: count, opcode: count, version: count%);
 event ldap_bind_responce%(c: connection, messageid: count, opcode: count, resultCode: count%);
-event ldap_unbind_request%(c: connection, messageid: count, opcode: count%));
+event ldap_unbind_request%(c: connection, messageid: count, opcode: count%);
 event ldap_search_request%(c: connection, messageid: count, opcode: count, scope: count, derefAliases: count, sizeLimit: count, timeLimit: count, typesOnly: bool%);
 event ldap_search_result_done%(c: connection, messageid: count, opcode: count, resultCode: count%);
