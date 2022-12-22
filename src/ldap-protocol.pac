@@ -3,7 +3,7 @@ type LDAP_PDU(is_orig: bool) = record{
         messageID:      uint8;
         opcode:         uint8;
         protocolOp:      ProtocolOp(opcode);
-}
+}&byteorder=littleendian;
 
 type ProtocolOp(appliaction:    uint8) = case appliaction of{
         0x60   ->  protocolOp1:   BindRequest;
