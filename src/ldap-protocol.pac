@@ -26,7 +26,7 @@ type BindRequest = record {
         somedata3:       uint8;
         version:        uint32;
         data :          bytestring &restofdata;
-}&let{proc: bool = $context.connection.proc_ldap_bind_request(this);}
+}&let{proc: bool = $context.connection.proc_ldap_bind_request(this);}&byteorder=littleendian;
 
 type BindResponse = record {
         somedata1:       uint8;
@@ -35,11 +35,11 @@ type BindResponse = record {
         rc:             uint8;
         resultCode:     ResultCode(rc);
         data :          bytestring &restofdata;
-}&let{proc: bool = $context.connection.proc_ldap_bind_responce(this);}
+}&let{proc: bool = $context.connection.proc_ldap_bind_responce(this);}&byteorder=littleendian;
 
 type UnbindRequest = record{
         data :          bytestring &restofdata;
-}&let{proc: bool = $context.connection.proc_ldap_Unbind_request(this);}
+}&let{proc: bool = $context.connection.proc_ldap_Unbind_request(this);}&byteorder=littleendian;
 
 type SearchRequest = record{
         somedata1:       uint32;
@@ -56,7 +56,7 @@ type SearchRequest = record{
         somedata6:       uint16;
         typesOnly:      bool;
         data :          bytestring &restofdata;
-}&let{proc: bool = $context.connection.proc_ldap_search_request(this);}
+}&let{proc: bool = $context.connection.proc_ldap_search_request(this);}&byteorder=littleendian;
 
 
 type Scope(sc: uint8) = case sc of{
@@ -79,6 +79,6 @@ type SearchResultDone = record{
         rc:             uint8;
         resultCode:     ResultCode(rc);
         data :          bytestring &restofdata;
-}&let{proc: bool = $context.connection.proc_ldap_search_result_done(this);}
+}&let{proc: bool = $context.connection.proc_ldap_search_result_done(this);}&byteorder=littleendian;
 
 
