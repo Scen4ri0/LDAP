@@ -1,4 +1,4 @@
-refine flow LDAP_Flow += {
+refine connection LDAP_Conn += {
     function proc_ldap_bind_request(msg: LDAP_PDU) : bool
     %{
         zeek::BifEvent::enqueue_ldap_bind_request(zeek_analyzer(), zeek_analyzer()->Conn(),
