@@ -13,7 +13,7 @@ type ProtocolOp(appliaction:    uint8) = case appliaction of{
         0x65   ->  protocolOp5:   SearchResultDone;
  }
      
-type ResultCode(rc: uint8) = case of rc{
+type ResultCode(rc: uint8) = case rc of {
         0x00 -> resultCode1:      uint8;# "success";                         
         0x20 -> resultCode2:      uint8;# "noSuchObject";             
 }
