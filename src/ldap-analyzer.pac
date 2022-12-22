@@ -4,7 +4,7 @@ refine connection LDAP_Conn += {
         zeek::BifEvent::enqueue_ldap_bind_request(zeek_analyzer(), zeek_analyzer()->Conn(),
         ${msg.messageID},
         ${msg.opcode},
-        ${msg.protocolOp.version});
+        ${msg.protocolOp.protocolOp1.version});
         return true;
     %}
     
@@ -13,7 +13,7 @@ refine connection LDAP_Conn += {
         zeek::BifEvent::enqueue_ldap_bind_responce(zeek_analyzer(), zeek_analyzer()->Conn(), 
         ${msg.messageID}, 
         ${msg.opcode}, 
-        ${msg.protocolOp.resultCode});
+        ${msg.protocolOp.protocolOp2.resultCode});
         return true;
     %}
 
@@ -30,11 +30,11 @@ refine connection LDAP_Conn += {
         zeek::BifEvent::enqueue_ldap_search_request(zeek_analyzer(), zeek_analyzer()->Conn(), 
         ${msg.messageID}, 
         ${msg.opcode}, 
-        ${msg.protocolOp.scope}, 
-        ${msg.protocolOp.derefAliases}, 
-        ${msg.protocolOp.sizeLimit}, 
-        ${msg.protocolOp.timeLimit}, 
-        ${msg.protocolOp.typesOnly});
+        ${msg.protocolOp.protocolOp4.scope}, 
+        ${msg.protocolOp.protocolOp4.derefAliases}, 
+        ${msg.protocolOp.protocolOp4.sizeLimit}, 
+        ${msg.protocolOp.protocolOp4.timeLimit}, 
+        ${msg.protocolOp.protocolOp4.typesOnly});
         return true;
     %}
         
@@ -43,7 +43,7 @@ refine connection LDAP_Conn += {
         zeek::BifEvent::enqueue_ldap_search_result_done(zeek_analyzer(), zeek_analyzer()->Conn(), 
         ${msg.messageID}, 
         ${msg.opcode}, 
-        ${msg.protocolOp.resultCode});
+        ${msg.protocolOp.protocolOp5.resultCode});
         return true;
     %}
 
