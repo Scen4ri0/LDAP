@@ -12,19 +12,13 @@ type ProtocolOp(appliaction:    uint8) = case appliaction of{
         0x63   ->  protocolOp4:   SearchRequest;
         0x65   ->  protocolOp5:   SearchResultDone;
  }&byteorder=littleendian;
-     
-type ResultCode(rc: uint8) = case rc of {
-        0x00 -> resultCode1:      uint8;# "success";                         
-        0x20 -> resultCode2:      uint8;# "noSuchObject";             
-}&byteorder=littleendian;
-
        
 
 type BindRequest = record {
         somedata1:       uint8;
         somedata2:       uint8;
         somedata3:       uint8;
-        version:        uint32;
+        version:        uint8;
         data :          bytestring &restofdata;
 }&let{proc: bool = $context.connection.proc_ldap_bind_request(this);}&byteorder=littleendian;
 
@@ -32,8 +26,7 @@ type BindResponse = record {
         somedata1:       uint8;
         somedata2:       uint8;
         somedata3:       uint8;
-        rc:             uint8;
-        resultCode:     ResultCode(rc);
+        resultCode:     uint8;
         data :          bytestring &restofdata;
 }&let{proc: bool = $context.connection.proc_ldap_bind_responce(this);}&byteorder=littleendian;
 
@@ -44,11 +37,9 @@ type UnbindRequest = record{
 type SearchRequest = record{
         somedata1:       uint32;
         somedata2:       uint8;
-        sc:             uint8;
-        scope:          Scope(sc);
+        scope:          uint8;
         somedata3:       uint16;
-        da:             uint8;
-        derefAliases:   DerefAliases(da) ;
+        derefAliases:   uint8 ;
         somedata4:       uint16;
         sizeLimit:      uint8;
         somedata5:       uint16;
@@ -59,25 +50,11 @@ type SearchRequest = record{
 }&let{proc: bool = $context.connection.proc_ldap_search_request(this);}&byteorder=littleendian;
 
 
-type Scope(sc: uint8) = case sc of{
-        0x00 -> scope1:        uint8;# "baseObject";
-        0x01 -> scope2:        uint8;# = "singleLevel";
-        0x02 -> scope3:        uint8;# = "wholeSubtree";
-}&byteorder=littleendian;
-
-type DerefAliases(da: uint8) = case da of {
-        0x00 ->   derefAliases1:       uint8;# "neverDerefAliases";       
-        0x01 ->   derefAliases2:       uint8;# "derefInSearching";        
-        0x02 ->   derefAliases3:       uint8;# "derefFindingBaseObj";     
-        0x03 ->   derefAliases4:       uint8;# "derefAlways";             
-}&byteorder=littleendian;
-
 type SearchResultDone = record{
         somedata1:       uint8;
         somedata2:       uint8;
         somedata3:       uint8;
-        rc:             uint8;
-        resultCode:     ResultCode(rc);
+        resultCode:     uint8;
         data :          bytestring &restofdata;
 }&let{proc: bool = $context.connection.proc_ldap_search_result_done(this);}&byteorder=littleendian;
 
