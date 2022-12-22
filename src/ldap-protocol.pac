@@ -11,12 +11,12 @@ type ProtocolOp(appliaction:    uint8) = case appliaction of{
         0x42   ->  protocolOp3:   UnbindRequest;
         0x63   ->  protocolOp4:   SearchRequest;
         0x65   ->  protocolOp5:   SearchResultDone;
- }
+ }&byteorder=littleendian;
      
 type ResultCode(rc: uint8) = case rc of {
         0x00 -> resultCode1:      uint8;# "success";                         
         0x20 -> resultCode2:      uint8;# "noSuchObject";             
-}
+}&byteorder=littleendian;
 
        
 
@@ -63,14 +63,14 @@ type Scope(sc: uint8) = case sc of{
         0x00 -> scope1:        uint8;# "baseObject";
         0x01 -> scope2:        uint8;# = "singleLevel";
         0x02 -> scope3:        uint8;# = "wholeSubtree";
-}
+}&byteorder=littleendian;
 
 type DerefAliases(da: uint8) = case da of {
         0x00 ->   derefAliases1:       uint8;# "neverDerefAliases";       
         0x01 ->   derefAliases2:       uint8;# "derefInSearching";        
         0x02 ->   derefAliases3:       uint8;# "derefFindingBaseObj";     
         0x03 ->   derefAliases4:       uint8;# "derefAlways";             
-}
+}&byteorder=littleendian;
 
 type SearchResultDone = record{
         somedata1:       uint8;
