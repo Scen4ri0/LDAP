@@ -2,7 +2,7 @@ type LDAP_PDU(is_orig: bool) = record{
         somedata:       uint32;
         messageID:      uint8;
         opcode:         uint8;
-        potocolOp:      ProtocolOp(opcode);
+        protocolOp:      ProtocolOp(opcode);
 }
 
 type ProtocolOp(appliaction:    uint8) = case appliaction of{
