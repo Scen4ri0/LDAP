@@ -17,7 +17,7 @@ refine connection LDAP_Conn += {
         return true;
     %}
 
-    function proc_ldap_Unbind_request(msg: LDAP_PDU) : bool
+    function proc_ldap_unbind_request(msg: LDAP_PDU) : bool
     %{
         zeek::BifEvent::enqueue_ldap_unbind_request(zeek_analyzer(), zeek_analyzer()->Conn(), 
         ${msg.messageID}, 

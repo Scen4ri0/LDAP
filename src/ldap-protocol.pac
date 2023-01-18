@@ -32,7 +32,7 @@ type BindResponse = record {
 
 type UnbindRequest = record{
         data :          bytestring &restofdata;
-}&let{proc: bool = $context.connection.proc_ldap_Unbind_request(this);}&byteorder=littleendian;
+}&let{proc: bool = $context.connection.proc_ldap_unbind_request(this);}&byteorder=littleendian;
 
 type SearchRequest = record{
         somedata1:       uint32;
