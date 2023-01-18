@@ -17,7 +17,6 @@ connection LDAP_Conn(zeek_analyzer: ZeekAnalyzer) {
 };
 
 
-%include ldap-strings.pac
 %include ldap-protocol.pac
 
 # Now we define the flow:
