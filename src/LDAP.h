@@ -3,7 +3,6 @@
 #include "events.bif.h"
 
 
-#include "zeek/analyzer/protocol/udp/UDP.h"
 #include "zeek/analyzer/protocol/tcp/TCP.h"
 
 #include "ldap_pac.h"
