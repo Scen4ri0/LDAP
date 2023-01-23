@@ -3,6 +3,12 @@ type LDAP_PDU(is_orig: bool) = record{
         messageID:      uint8;
         opcode:         uint8;
         protocolOp:      ProtocolOp(opcode);
+}&let{
+        proc1: bool = $context.connection.proc_ldap_bind_request(this);
+        proc2: bool = $context.connection.proc_ldap_bind_responce(this);
+        proc3: bool = $context.connection.proc_ldap_unbind_request(this);
+        proc4: bool = $context.connection.proc_ldap_search_request(this);
+        proc5: bool = $context.connection.proc_ldap_search_result_done(this);
 }&byteorder=littleendian;
 
 type ProtocolOp(appliaction:    uint8) = case appliaction of{
@@ -21,7 +27,7 @@ type BindRequest = record {
         somedata3:       uint8;
         version:        uint8;
         data :          bytestring &restofdata;
-}&let{proc: bool = $context.connection.proc_ldap_bind_request(a: LDAP_PDU);}&byteorder=littleendian;
+}&byteorder=littleendian;
 
 type BindResponse = record {
         somedata1:       uint8;
@@ -29,11 +35,11 @@ type BindResponse = record {
         somedata3:       uint8;
         resultCode:     uint8;
         data :          bytestring &restofdata;
-}&let{proc: bool = $context.connection.proc_ldap_bind_responce(a: LDAP_PDU);}&byteorder=littleendian;
+}&byteorder=littleendian;
 
 type UnbindRequest = record{
         data :          bytestring &restofdata;
-}&let{proc: bool = $context.connection.proc_ldap_unbind_request(a: LDAP_PDU);}&byteorder=littleendian;
+}&byteorder=littleendian;
 
 type SearchRequest = record{
         somedata1:       uint32;
@@ -48,7 +54,7 @@ type SearchRequest = record{
         somedata6:       uint16;
         typesOnly:      uint8;
         data :          bytestring &restofdata;
-}&let{proc: bool = $context.connection.proc_ldap_search_request(a: LDAP_PDU);}&byteorder=littleendian;
+}&byteorder=littleendian;
 
 
 type SearchResultDone = record{
@@ -57,6 +63,6 @@ type SearchResultDone = record{
         somedata3:       uint8;
         resultCode:     uint8;
         data :          bytestring &restofdata;
-}&let{proc: bool = $context.connection.proc_ldap_search_result_done(a: LDAP_PDU);}&byteorder=littleendian;
+}&byteorder=littleendian;
 
 
