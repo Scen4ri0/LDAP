@@ -11,6 +11,7 @@ type ProtocolOp(appliaction:    uint8) = case appliaction of{
         0x42   ->  protocolOp3:   UnbindRequest;
         0x63   ->  protocolOp4:   SearchRequest;
         0x65   ->  protocolOp5:   SearchResultDone;
+        default -> data : bytestring &restofdata;
  }&byteorder=littleendian;
        
 
@@ -45,7 +46,7 @@ type SearchRequest = record{
         somedata5:       uint16;
         timeLimit:      uint8;
         somedata6:       uint16;
-        typesOnly:      bool;
+        typesOnly:      uint8;
         data :          bytestring &restofdata;
 }&let{proc: bool = $context.connection.proc_ldap_search_request(this);}&byteorder=littleendian;
 
