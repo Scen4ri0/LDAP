@@ -1,5 +1,5 @@
 refine connection LDAP_Conn += {
-    function proc_ldap_bind_request(msg: BindRequest) : bool
+    function proc_ldap_bind_request(msg: LDAP_PDU) : bool
     %{
         zeek::BifEvent::enqueue_ldap_bind_request(zeek_analyzer(), zeek_analyzer()->Conn(),
         ${msg.messageID},
@@ -8,7 +8,7 @@ refine connection LDAP_Conn += {
         return true;
     %}
     
-    function proc_ldap_bind_responce(msg: BindResponse) : bool
+    function proc_ldap_bind_responce(msg: LDAP_PDU) : bool
     %{
         zeek::BifEvent::enqueue_ldap_bind_responce(zeek_analyzer(), zeek_analyzer()->Conn(), 
         ${msg.messageID}, 
@@ -17,7 +17,7 @@ refine connection LDAP_Conn += {
         return true;
     %}
 
-    function proc_ldap_unbind_request(msg: UnbindRequest) : bool
+    function proc_ldap_unbind_request(msg: LDAP_PDU) : bool
     %{
         zeek::BifEvent::enqueue_ldap_unbind_request(zeek_analyzer(), zeek_analyzer()->Conn(), 
         ${msg.messageID}, 
@@ -25,7 +25,7 @@ refine connection LDAP_Conn += {
         return true;
     %}
 
-    function proc_ldap_search_request(msg: SearchRequest) : bool
+    function proc_ldap_search_request(msg: LDAP_PDU) : bool
     %{
         zeek::BifEvent::enqueue_ldap_search_request(zeek_analyzer(), zeek_analyzer()->Conn(), 
         ${msg.messageID}, 
@@ -38,7 +38,7 @@ refine connection LDAP_Conn += {
         return true;
     %}
         
-    function proc_ldap_search_result_done(msg: SearchResultDone) : bool
+    function proc_ldap_search_result_done(msg: LDAP_PDU) : bool
     %{
         zeek::BifEvent::enqueue_ldap_search_result_done(zeek_analyzer(), zeek_analyzer()->Conn(), 
         ${msg.messageID}, 
