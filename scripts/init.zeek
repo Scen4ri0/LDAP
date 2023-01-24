@@ -23,20 +23,22 @@ export {
 	global log_ldap: event(rec: Info);
 }
 
-
+const ports = {389/tcp};
+redef likely_server_ports += { ports };
 event zeek_init() &priority=5
 	{
 	Log::create_stream(LDAP::LOG, [$columns=Info, $ev=log_ldap, $path="ldap"]);
+	Analyzer::register_for_ports(Analyzer::Analyzer_LDAP, ports);
 	}
 
-event ldap_bind_request(c: connection, messageid: count, opcode: count, version: count);
+event ldap_bind_request(c: connection, messageid: count, opcode: count, version: count)
 	{
 	local info: Info;
 	info$ts  = network_time();
 	info$uid = c$uid;
 	info$id  = c$id;
     info$messageid = messageid;
-	info$opcode  = protocolOp_types(opcode);
+	info$opcode  = protocolOp_types[opcode];
 	info$version  = version;
 	Log::write(LDAP::LOG, info);
 	}
@@ -48,8 +50,8 @@ event ldap_bind_responce(c: connection, messageid: count, opcode: count, resultC
 	info$uid = c$uid;
 	info$id  = c$id;
     info$messageid = messageid;
-	info$opcode  = protocolOp_types(opcode);
-	info$resultCode  = resultCode_types(resultCode);
+	info$opcode  = protocolOp_types[opcode];
+	info$resultCode  = resultCode_types[resultCode];
 
 	Log::write(LDAP::LOG, info);
 	}
@@ -61,21 +63,21 @@ event ldap_unbind_request(c: connection, messageid: count, opcode: count)
 	info$uid = c$uid;
 	info$id  = c$id;
     info$messageid = messageid;
-	info$opcode  = protocolOp_types(opcode);
+	info$opcode  = protocolOp_types[opcode];
 
 	Log::write(LDAP::LOG, info);
 	}
 
-event ldap_search_request(c: connection, messageid: count, opcode: count, scope: count, derefAliases: count, sizeLimit: count, timeLimit: count, typesOnly: bool%)
+event ldap_search_request(c: connection, messageid: count, opcode: count, scope: count, derefAliases: count, sizeLimit: count, timeLimit: count, typesOnly: count)
 	{
 	local info: Info;
 	info$ts  			= network_time();
 	info$uid 			= c$uid;
 	info$id  			= c$id;
     info$messageid		= messageid;
-	info$protocolOp 	= protocolOp_types(protocolOp);
-	info$scope 			= Scope_types(scope);
-	info$derefAliases 	= DerefAliases_types(derefAliases);
+	info$opcode	= protocolOp_types[opcode];
+	info$scope 			= Scope_types[scope];
+	info$derefAliases 	= DerefAliases_types[derefAliases];
 	info$sizeLimit		= sizeLimit;
 	info$timeLimit 		= timeLimit;
 	info$typesOnly 		= typesOnly;
@@ -91,8 +93,8 @@ event ldap_search_result_done(c: connection, messageid: count, opcode: count, re
 	info$uid = c$uid;
 	info$id  = c$id;
     info$messageid = messageid;
-	info$opcode 	= protocolOp_types(opcode);
-	info$resultCode  = resultCode_types(resultCode);
+	info$opcode 	= protocolOp_types[opcode];
+	info$resultCode  = resultCode_types[resultCode];
 
 	Log::write(LDAP::LOG, info);
 	}
