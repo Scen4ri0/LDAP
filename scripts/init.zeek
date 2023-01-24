@@ -10,11 +10,11 @@ export {
 		uid:                string  &log;
 		id:                 conn_id &log;
         messageid:          count   &log;
-		opcode:         	count   &log;
+		opcode:         	string   &log;
 		version:         	count   &log;
-		resultCode:         count   &log;
-		scope:        	 	count   &log;
-		derefAliases:       count   &log;
+		resultCode:         string   &log;
+		scope:        	 	string   &log;
+		derefAliases:       string   &log;
 		sizeLimit:         	count   &log;
 		timeLimit:         	count   &log;
 		typesOnly:         	count   &log;	
