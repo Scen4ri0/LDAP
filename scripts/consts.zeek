@@ -21,9 +21,9 @@ export {
     }&default = function(n: count): string {return fmt("unknown-message-type-%d", n);};
 
     const DerefAliases_types = {
-        [0] = "neverDerefAliases"
-        [1] = "derefInSearching"
-        [2] = "derefFindingBaseObj"
-        [3] = "derefAlways"    
+        [0] = "neverDerefAliases",
+        [1] = "derefInSearching",
+        [2] = "derefFindingBaseObj",
+        [3] = "derefAlways",  
     }&default = function(n: count): string {return fmt("unknown-message-type-%d", n);};
 }
