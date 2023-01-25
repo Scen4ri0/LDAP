@@ -28,7 +28,7 @@ redef likely_server_ports += { ports };
 event zeek_init() &priority=5
 	{
 	Log::create_stream(LDAP::LOG, [$columns=Info, $ev=log_ldap, $path="ldap"]);
-	Analyzer::register_for_ports(Analyzer::Analyzer_LDAP, ports);
+	Analyzer::register_for_ports(Analyzer::ANALYZER_LDAP, ports);
 	}
 
 event ldap_bind_request(c: connection, messageid: count, opcode: count, version: count)
