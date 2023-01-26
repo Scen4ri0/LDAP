@@ -9,24 +9,28 @@
 
 namespace zeek::analyzer::ldap {
 
-class LDAP: public Analyzer {
+class LDAP: public tcp::TCP_ApplicationAnalyzer
+{
 public:
-	LDAP(Connection* conn);
-	virtual ~LDAP();
+ LDAP(Connection* conn);
+ virtual ~LDAP();
 
-	// Overriden from Analyzer.
-	virtual void Done();
-	
-	virtual void DeliverPacket(int len, const u_char* data, bool orig,
-					uint64_t seq, const IP_Hdr* ip, int caplen);
-	
+ // Overriden from Analyzer.
+ virtual void Done();
+ 
+ virtual void DeliverStream(int len, const u_char* data, bool orig);
+ virtual void Undelivered(uint64_t seq, int len, bool orig);
 
-	static analyzer::Analyzer* InstantiateAnalyzer(Connection* conn)
-		{
-		return new LDAP(conn);
-		}
+ // Overriden from tcp::TCP_ApplicationAnalyzer.
+ virtual void EndpointEOF(bool is_orig);
+ 
+
+ static analyzer::Analyzer* InstantiateAnalyzer(Connection* conn)
+  { return new LDAP(conn); }
 
 protected:
-	binpac::LDAP::LDAP_Conn* interp;
-	};
-}
+ binpac::LDAP::LDAP_Conn* interp;
+ bool had_gap;
+ };
+
+} // namespace analyzer::*
